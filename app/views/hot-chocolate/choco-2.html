@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  <a class="govuk-back-link" href="/url/of/previous/page">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Do you like caramel chocolate?</h1>
+
+      <form class="form" action="/hot-chocolate/check-your-answers" method="post">
+
+        <p><div class="govuk-form-group">
+          <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--l" for="more-detail">
+              Can you provide more detail?
+            </label>
+          </h1>
+          
+          <textarea class="govuk-textarea" id="do-you-like-caramel-chocolate" name="do-you-like-caramel-chocolate" rows="3" aria-describedby="more-detail-hint" value= data['most-impressive-trick']> </textarea>
+        </div></p> 
+
+        <p>[See <a href="https://design-system.service.gov.uk">the GOV.UK Design System</a> for examples]</p>
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

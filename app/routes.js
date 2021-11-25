@@ -10,6 +10,16 @@ router.get('/', function (req, res) {
   res.render('computers/frequency', { title: "Select your poison" });
 })
 
+// Singe selection Figma Route
+router.get('/computers/figma', function (req, res) {
+  res.render('computers/figma', { title: "Figma Rocks" });
+})
+
+// Singe selection Gov Prototype Route
+router.get('/computers/gov-prototyping-kit', function (req, res) {
+  res.render('computers/gov-prototyping-kit', { title: "Gov Prototyping Kit Rocks" });
+})
+
 // Run this code when a form is submitted to 'choco-1-answer'
 router.post('/hot-chocolate/choco-1-answer', function (req, res) {
 
@@ -69,16 +79,16 @@ router.post('/computers/types-answer', function (req, res) {
 router.post('/computers/frequency-answer', function (req, res) {
 
   // Make a variable and give it the value from 'how-often'
-  var howOften = req.session.data['how-often']
+  var whereNext = req.session.data['where-next']
 
   // Check whether the variable matches a condition
-  if (howOften == "everyday"){
-    // Send user to next page
-    res.redirect('/computers/comments') 
+  if (whereNext == "design-tools"){
+    // Send user to the design tools page
+    res.redirect('/computers/design') 
 
   } else {
-    // Send user to ineligible page
-    res.redirect('/computers/sometimes')
+    // Send user to a comments page
+    res.redirect('/computers/comments')
   }
 
 })
@@ -88,20 +98,36 @@ router.post('/computers/design-answer', function (req, res) {
 console.log(req);
 
   // Make a variable and give it the value from 'software'
-  var software = req.session.data['software']
+  var software = req.session.data['design-software']
+  console.log ('\nSoftware choices are: ' + software)
 
-  // Check whether the variable matches a condition
-  if (software == "figma"){
-    // Send user to next page
-    res.redirect('/computers/whizz') 
 
-    if (software == "gov prototyping kit")
-      // Send user to next page
-      res.redirect('/computers/whizz')
-
-  } else {
-    // Send user to ineligible page
-    res.redirect('/computers/old-skool')
+  // Single answer so lets redirect accordingly
+  switch (software.toString().trim()) {
+    case 'pen and paper':
+      res.redirect('/computers/old-skool') 
+      break;      
+      case 'figma':
+        res.redirect('/computers/figma') 
+        break;     
+      case 'gov prototyping kit':
+        res.redirect('/computers/gov-prototyping-kit') 
+        break;    
+      case 'figma,gov prototyping kit':
+        res.redirect('/computers/figma-gov-prototyping-kit') 
+        break;         
+      case 'gov prototyping kit,pen and paper':
+        res.redirect('/computers/gov-prototyping-kit-pen') 
+        break;    
+      case 'figma,pen and paper':
+        res.redirect('/computers/figma-pen') 
+        break; 
+      case 'figma,gov prototyping kit,pen and paper':
+        res.redirect('/computers/figma-gov-pen') 
+        break; 
+    default:
+      res.redirect('/computers/gov-prototyping-kit') 
+      break;      
   }
 
 })

@@ -5,6 +5,11 @@ const router = express.Router()
 
 require('./routes/v1.js')(router);
 
+// Add default route
+router.get('/', function (req, res) {
+  res.render('computers/frequency', { title: "Select your poison" });
+})
+
 // Run this code when a form is submitted to 'choco-1-answer'
 router.post('/hot-chocolate/choco-1-answer', function (req, res) {
 
